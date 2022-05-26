@@ -5,27 +5,38 @@ import yaml
 
 from verilogwriter import Signal, Wire, Instance, ModulePort, VerilogWriter
 
-WB_MASTER_PORTS = [Signal('adr', 32),
-                   Signal('dat', 32),
-                   Signal('sel',  4),
-                   Signal('we'),
-                   Signal('cyc'),
-                   Signal('stb'),
-                   Signal('cti',  3),
-                   Signal('bte',  2)]
+WB_MASTER_PORTS = [
+    Signal('adr', 32),
+    Signal('dat', 32),
+    Signal('sel', 4),
+    Signal('we'),
+    Signal('cyc'),
+    Signal('stb'),
+    Signal('cti', 3),
+    Signal('bte', 2)
+]
 
-WB_SLAVE_PORTS  = [Signal('rdt', 32),
-                   Signal('ack'),
-                   Signal('err'),
-                   Signal('rty')]
+WB_SLAVE_PORTS = [
+    Signal('rdt', 32),
+    Signal('ack'),
+    Signal('err'),
+    Signal('rty')
+]
 
-WB_DATA_WIDTH = defaultdict(float, { 'dat': 1.0, 'rdt': 1.0 })
+WB_DATA_WIDTH = defaultdict(float, {
+    'dat': 1.0,
+    'rdt': 1.0
+})
 
 class Error(Exception):
-  """Base error for wb_intercon_gen"""
+    """
+    Base error for wb_intercon_gen
+    """
 
 class UnknownPropertyError(Error):
-  """An unknown property was encounterned while parsing the config file."""
+    """
+    An unknown property was encounterned while parsing the config file.
+    """
 
 def parse_number(s):
     if type(s) == int:
